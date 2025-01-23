@@ -32,7 +32,7 @@ const Article: React.FC = () => {
       <Header />
       <div className="p-6">
         {/* Search and Filters */}
-        <div className="mb-6 flex flex-col sm:flex-row sm:space-x-6">
+        <div className="mb-6 flex items-center flex-col sm:flex-row sm:space-x-6">
           <SearchBar
             value={filters.search}
             onChange={(e) => setFilters({ ...filters, search: e.target.value })}

@@ -1,6 +1,7 @@
 // src/components/Articles/ArticleFilter.tsx
 
 import React from 'react';
+import Select from '../Layout/Select'; // Import the Select component
 
 interface ArticleFilterProps {
   filters: {
@@ -13,52 +14,65 @@ interface ArticleFilterProps {
 }
 
 const ArticleFilter: React.FC<ArticleFilterProps> = ({ filters, onFilterChange }) => {
+  // Define the options for each filter
+  const dateOptions = [
+    { value: 'today', label: 'Today' },
+    { value: 'week', label: 'This Week' },
+    { value: 'month', label: 'This Month' },
+    { value: 'year', label: 'This Year' },
+  ];
+
+  const categoryOptions = [
+    { value: 'tech', label: 'Technology' },
+    { value: 'health', label: 'Health' },
+    { value: 'sports', label: 'Sports' },
+    { value: 'business', label: 'Business' },
+  ];
+
+  const sourceOptions = [
+    { value: 'cnn', label: 'CNN' },
+    { value: 'bbc', label: 'BBC' },
+    { value: 'nytimes', label: 'NY Times' },
+  ];
+
+  const authorOptions = [
+    { value: 'john', label: 'John Doe' },
+    { value: 'jane', label: 'Jane Smith' },
+  ];
+
   return (
-    <div className="flex flex-wrap space-x-4 gap-4 sm:flex-nowrap">
-      <select
+    <div className="flex flex-wrap  gap-4 sm:flex-nowrap">
+      {/* Date Filter */}
+      <Select
         value={filters.date}
         onChange={(e) => onFilterChange({ date: e.target.value })}
-        className="px-4 py-2 border border-gray-300 rounded-md w-full sm:w-auto"
-      >
-        <option value="">Select Date</option>
-        <option value="today">Today</option>
-        <option value="week">This Week</option>
-        <option value="month">This Month</option>
-        <option value="year">This Year</option>
-      </select>
+        options={dateOptions}
+        placeholder="Select Date"
+      />
 
-      <select
+      {/* Category Filter */}
+      <Select
         value={filters.category}
         onChange={(e) => onFilterChange({ category: e.target.value })}
-        className="px-4 py-2 border border-gray-300 rounded-md w-full sm:w-auto"
-      >
-        <option value="">Select Category</option>
-        <option value="tech">Technology</option>
-        <option value="health">Health</option>
-        <option value="sports">Sports</option>
-        <option value="business">Business</option>
-      </select>
+        options={categoryOptions}
+        placeholder="Select Category"
+      />
 
-      <select
+      {/* Source Filter */}
+      <Select
         value={filters.source}
         onChange={(e) => onFilterChange({ source: e.target.value })}
-        className="px-4 py-2 border border-gray-300 rounded-md w-full sm:w-auto"
-      >
-        <option value="">Select Source</option>
-        <option value="cnn">CNN</option>
-        <option value="bbc">BBC</option>
-        <option value="nytimes">NY Times</option>
-      </select>
+        options={sourceOptions}
+        placeholder="Select Source"
+      />
 
-      <select
+      {/* Author Filter */}
+      <Select
         value={filters.author}
         onChange={(e) => onFilterChange({ author: e.target.value })}
-        className="px-4 py-2 border border-gray-300 rounded-md w-full sm:w-auto"
-      >
-        <option value="">Select Author</option>
-        <option value="john">John Doe</option>
-        <option value="jane">Jane Smith</option>
-      </select>
+        options={authorOptions}
+        placeholder="Select Author"
+      />
     </div>
   );
 };
