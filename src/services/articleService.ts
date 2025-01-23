@@ -1,5 +1,8 @@
 // src/services/articleService.ts
 
+import { AxiosRequestConfig } from "axios";
+import { ARTICLE_URL } from "../utils/urls";
+
 interface Article {
     id: string;
     title: string;
@@ -125,5 +128,13 @@ interface Article {
       const article = dummyArticles.find((article) => article.id === id);
       return { data: article };
     },
+    getArticleConfig: (filters: any, page: number): AxiosRequestConfig => {
+        return {
+          method: 'GET',
+          url: ARTICLE_URL, // Adjust this URL to your backend endpoint
+          params: { ...filters, page }, // Merge filters and page number
+        };
+      },
   };
+
   
