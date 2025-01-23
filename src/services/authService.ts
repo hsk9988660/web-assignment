@@ -1,23 +1,21 @@
-import { api } from './api';
+import { AxiosRequestConfig } from 'axios';
 
-interface RegisterData {
-  name: string;
-  email: string;
-  password: string;
-}
 
-interface LoginData {
-    email: string;
-    password: string;
-  }
-
-export const authService = {
-  register: async (data: RegisterData) => {
-    const response = await api.post('/register', data);
-    return response.data;
-  },
-  login: async (data: LoginData) => {
-    const response = await api.post('/login', data);
-    return response.data;
+ const authService = {
+  register: (name: string, email: string, password: string): AxiosRequestConfig => ({
+        method: 'POST',
+        url: '/auth/register',
+        data: { name, email, password },
+      }),
+  login: (email: string, password: string): AxiosRequestConfig => {
+    return {
+      method: 'POST',
+      url: '/auth/login',
+      data: {
+        email,
+        password,
+      },
+    };
   },
 };
+export default  authService

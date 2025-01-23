@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import InputField from '../components/Layout/InputField';
 import SubmitButton from '../components/Layout/SubmitButton';
-import { authService } from '../services/authService';
-import { Link } from 'react-router';
+import  useAxios  from '../hooks/useAxios';
+import authService from '../services/authService';
+import { Link } from 'react-router-dom';
+import Loader from '../components/Layout/Loader';
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +13,7 @@ const Register: React.FC = () => {
     password: '',
   });
 
-  const [error, setError] = useState<string | null>(null);
+  const { callApi, isLoading, error } = useAxios();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -20,12 +22,13 @@ const Register: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await authService.register(formData);
+
+    const apiConfig = authService.register(formData.name, formData.email, formData.password);
+    const response = await callApi(apiConfig);
+
+    if (response) {
       console.log('User registered successfully:', response);
       // Redirect user or show a success message
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Something went wrong');
     }
   };
 
@@ -66,7 +69,9 @@ const Register: React.FC = () => {
             onChange={handleChange}
             required
           />
-          <SubmitButton label="Sign Up" />
+          <div className="mt-4">
+            {isLoading ? <Loader size="medium" /> : <SubmitButton label="Sign Up" />}
+          </div>
         </form>
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">

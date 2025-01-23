@@ -1,10 +1,10 @@
-// src/pages/Login.tsx
-
 import React, { useState } from 'react';
 import InputField from '../components/Layout/InputField';
 import SubmitButton from '../components/Layout/SubmitButton';
-import { authService } from '../services/authService';
-import { Link, useNavigate } from 'react-router-dom';
+import  useAxios  from '../hooks/useAxios';
+import { useNavigate, Link } from 'react-router-dom';
+import Loader from '../components/Layout/Loader';
+import  authService  from '../services/authService';
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -12,23 +12,22 @@ const Login: React.FC = () => {
     password: '',
   });
 
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate(); // Using useNavigate from react-router-dom v6+
+  const { callApi, isLoading, error } = useAxios();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
 
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await authService.login({email: formData.email, password:formData.password});
+    const apiConfig = authService.login(formData.email, formData.password);
+    const response = await callApi(apiConfig);
+    if (response) {
       console.log('User logged in successfully:', response);
-      // Redirect to homepage or dashboard after login
-      navigate('/home'); // Using navigate instead of history.push
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Something went wrong');
+      navigate('/home');
     }
   };
 
@@ -60,7 +59,9 @@ const Login: React.FC = () => {
             onChange={handleChange}
             required
           />
-          <SubmitButton label="Login" />
+          <div className="mt-4">
+            {isLoading ? <Loader size="medium" /> : <SubmitButton label="Login" />}
+          </div>
         </form>
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
