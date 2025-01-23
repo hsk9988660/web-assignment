@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { articleService } from '../services/articleService';
 import ArticleCard from '../components/Articles/ArticleCard';
 import ArticleFilter from '../components/Articles/ArticleFilter';
-import SearchBar from '../components/Layout/SearchBar';
 import Header from '../components/Layout/Header';
+import InputField from '../components/Layout/InputField';
 
 const Article: React.FC = () => {
   const [articles, setArticles] = useState([]);
@@ -33,10 +33,16 @@ const Article: React.FC = () => {
       <div className="p-6">
         {/* Search and Filters */}
         <div className="mb-6 flex items-center flex-col sm:flex-row sm:space-x-6">
-          <SearchBar
+        <InputField
+            id="email"
+            label="Search"
+            type="text"
+            placeholder="Search for articles.."
             value={filters.search}
             onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+            isSearchBar
           />
+         
           <ArticleFilter
             filters={filters}
             onFilterChange={(newFilters) => setFilters({ ...filters, ...newFilters })}
