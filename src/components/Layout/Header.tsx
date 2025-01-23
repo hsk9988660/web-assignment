@@ -16,10 +16,10 @@ const Header: React.FC = () => {
 
   return (
     <header className="flex justify-between items-center p-4 bg-blue-600 text-white shadow-md">
-      {/* Left side: Logo */}
-      <div className="flex items-center space-x-4">
-        <img src="/assets/logo.png" alt="Logo" className="h-8" />
-        <h1 className="text-2xl font-semibold">My Application</h1>
+      {/* Left side: Logo and Title */}
+      <div className="flex items-center space-x-4 sm:space-x-6">
+        <img src="/assets/logo.png" alt="Logo" className="h-8 sm:h-10" />
+        <h1 className="text-2xl sm:text-3xl font-semibold">My Application</h1>
       </div>
 
       {/* Right side: Username and dropdown */}
@@ -29,9 +29,9 @@ const Header: React.FC = () => {
           className="flex items-center space-x-2 bg-blue-500 rounded-full px-4 py-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
         >
           <div className="w-8 h-8 bg-gray-500 text-white flex items-center justify-center rounded-full">
-            <span className="text-lg font-bold">A</span> {/* You can display the first letter of the username */}
+            <span className="text-lg font-bold">A</span> {/* Placeholder for the user's initial */}
           </div>
-          <span className="hidden sm:block">Username</span> {/* This can be dynamically fetched */}
+          <span className="hidden sm:block">Username</span> {/* Show username on larger screens */}
         </button>
 
         {/* Dropdown Menu */}

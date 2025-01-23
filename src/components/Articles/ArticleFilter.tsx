@@ -14,11 +14,11 @@ interface ArticleFilterProps {
 
 const ArticleFilter: React.FC<ArticleFilterProps> = ({ filters, onFilterChange }) => {
   return (
-    <div className="flex space-x-4">
+    <div className="flex flex-wrap space-x-4 gap-4 sm:flex-nowrap">
       <select
         value={filters.date}
         onChange={(e) => onFilterChange({ date: e.target.value })}
-        className="px-4 py-2 border border-gray-300 rounded-md"
+        className="px-4 py-2 border border-gray-300 rounded-md w-full sm:w-auto"
       >
         <option value="">Select Date</option>
         <option value="today">Today</option>
@@ -30,7 +30,7 @@ const ArticleFilter: React.FC<ArticleFilterProps> = ({ filters, onFilterChange }
       <select
         value={filters.category}
         onChange={(e) => onFilterChange({ category: e.target.value })}
-        className="px-4 py-2 border border-gray-300 rounded-md"
+        className="px-4 py-2 border border-gray-300 rounded-md w-full sm:w-auto"
       >
         <option value="">Select Category</option>
         <option value="tech">Technology</option>
@@ -42,7 +42,7 @@ const ArticleFilter: React.FC<ArticleFilterProps> = ({ filters, onFilterChange }
       <select
         value={filters.source}
         onChange={(e) => onFilterChange({ source: e.target.value })}
-        className="px-4 py-2 border border-gray-300 rounded-md"
+        className="px-4 py-2 border border-gray-300 rounded-md w-full sm:w-auto"
       >
         <option value="">Select Source</option>
         <option value="cnn">CNN</option>
@@ -53,7 +53,7 @@ const ArticleFilter: React.FC<ArticleFilterProps> = ({ filters, onFilterChange }
       <select
         value={filters.author}
         onChange={(e) => onFilterChange({ author: e.target.value })}
-        className="px-4 py-2 border border-gray-300 rounded-md"
+        className="px-4 py-2 border border-gray-300 rounded-md w-full sm:w-auto"
       >
         <option value="">Select Author</option>
         <option value="john">John Doe</option>
