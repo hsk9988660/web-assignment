@@ -49,7 +49,7 @@ const Article: React.FC = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <div className="p-6">
         {/* Search and Filters */}
         <div className="mb-6 flex items-center flex-col sm:flex-row sm:space-x-6">
