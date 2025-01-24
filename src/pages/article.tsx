@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { articleService } from '../services/articleService';
 import ArticleCard from '../components/Articles/ArticleCard';
 import ArticleFilter from '../components/Articles/ArticleFilter';
-import Header from '../components/Layout/Header';
 import InputField from '../components/Layout/InputField';
 import  useAxios  from '../hooks/useAxios'; // Assuming you have the custom hook for API calls
 import { dummyArticles } from '../utils/dummyResponses';
